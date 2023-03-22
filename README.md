@@ -3,9 +3,9 @@
 - React and MERN Stack
 
 ## Table of Contents:
-[62. "private" and "public" Access Modifiers](#62-private-and-public-access-modifiers)
-[63. Shorthand Initialization](#63-shorthand-initialization)
-[64. "readonly" Properties](#64-readonly-properties)
+62. [62. "private" and "public" Access Modifiers](#62-private-and-public-access-modifiers)
+63. [63. Shorthand Initialization](#63-shorthand-initialization)
+64. [64. "readonly" Properties](#64-readonly-properties)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
