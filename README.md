@@ -2,14 +2,20 @@
 - A repo that helps me review and understand Basics of TypeScript
 - React and MERN Stack
 
-### 62. "private" and "public" Access Modifiers
+## Table of Contents:
+[62. "private" and "public" Access Modifiers](#62-private-and-public-access-modifiers)
+[63. Shorthand Initialization](#63-shorthand-initialization)
+[64. "readonly" Properties](#64-readonly-properties)
+
+### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
 - `private` keywork: can ONLY be accessed inside a Class
 - Source: ["private" and "public" Access Modifiers](https://github.com/Huulamnguyen/understanding-typescript/tree/main/cl-interfaces-03-private-and-public)
 
-### 63. Shorthand Initialization
+### 63. Shorthand Initialization <a name="63-shorthand-initialization"></a>
+- Will update later
 
-### 64. "readonly" Properties
+### 64. "readonly" Properties <a name="64-readonly-properties"></a>
 - `readonly`: To make it clear that it shouldn't change 
 - `readonly` is introduced by TypeScript, it does not exist in JavaScript.
 - It makes sure that if you try to write to its property thereafter, you fail. So you can only use it once during initialization
