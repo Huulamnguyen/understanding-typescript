@@ -9,6 +9,7 @@
 65. [65. Inheritance](#65-inheritance)
 66. [66. Overriding Properties & The "protected" Modifier](#66-overriding-properties)
 67. [67. Getters & Setters](#67-getters-setters)
+68. [68. Static Methods & Properties](#68-static-method-properties)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -96,7 +97,7 @@ You have an Class Department:
             console.log(this.employees.length);
             console.log(this.employees);
         }
-}
+    }
 ```
 
 Now, let create specialize department called "ITDepartment" and inherite the Departmant Class by `extends` keyword:
@@ -272,3 +273,52 @@ accounting.mostRecentReport = 'Year End Report';
 accounting.addReport('Something went wrong...');
 console.log(accounting.mostRecentReport);
 ```
+### 68. Static Methods & Properties <a name="68-static-method-properties"></a>
+
+- Static `static` properties and methods allow you to add properties and methods to classes which are not accessed on an instance of the class, so where you don't need to call new class name first, but which you access directly on the class.
+- For example: on the `Department` class, we want a method `createEmployee` and that is something we might wanna be able to access without instantiating `Department` class. Take a look at the code below:
+
+```typescript
+    class Department {
+        // private readonly id: string;
+        // private name: string;
+        private employees: string[] = [];
+
+        static fiscalYear = 2020;
+
+        static createEmployee(name: sting){
+            return {name: name};s
+        }
+
+        constructor(private readonly id: string, public name: string) {
+            // this.id = id;
+            // this.name = n;
+            console.log(Department.fiscalYear);
+        }
+
+        describe(this: Department) {
+            console.log(`Department (${this.id}): ${this.name}`);
+        }
+
+        addEmployee(employee: string) {
+            // validation etc
+            // this.id = 'd2';
+            this.employees.push(employee);
+        }
+
+        printEmployeeInformation() {
+            console.log(this.employees.length);
+            console.log(this.employees);
+        }
+    }
+```
+
+- Create a new employee, we call it directly on the class, without the `new` keyword. For example:
+
+```typescript
+    const employee1 = Department.createEmployee('Liam');
+    console.log(employee1)
+    console.log(Department.fiscalYear)
+```
+
+- Note: you can only access static method and properties by use the class name NOT `this` keyworld.
