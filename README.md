@@ -8,6 +8,7 @@
 64. [64. "readonly" Properties](#64-readonly-properties)
 65. [65. Inheritance](#65-inheritance)
 66. [66. Overriding Properties & The "protected" Modifier](#66-overriding-properties)
+67. [67. Getters & Setters](#67-getters-setters)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -210,4 +211,64 @@ You now can create a new deprtment called 'AccountingDepartment' and its own pro
             console.log(this.employees);
         }
     }
+```
+
+### 67. Getters & Setters <a name="67-getters-setters"></a>
+
+- A getter `get `is basically a property, where you execute a function or method, when you retrieve a value and that allows you as a developer to add more complex logic. Here, you create a getter by using the get keyword, and then any name of your choice. Typically closely related to the property you're trying to control the access to.
+- Getter `get` should return something.
+
+- A setter `set` to set a value to a property. Setter need to take an argument.
+
+- So these are getters and setters, which can be great for encapsulating logic, and for adding extra logic, that should run when you try to read a property, or when you try to set a property. 
+
+- Take a look at the example below:
+
+```typescript
+    class AccountingDepartment extends Department {
+        private lastReport: string;
+
+        get mostRecentReport() {
+            if (this.lastReport) {
+            return this.lastReport;
+            }
+            throw new Error('No report found.');
+        }
+
+        set mostRecentReport(value: string) {
+            if (!value) {
+            throw new Error('Please pass in a valid value!');
+            }
+            this.addReport(value);
+        }
+
+        constructor(id: string, private reports: string[]) {
+            super(id, 'Accounting');
+            this.lastReport = reports[0];
+        }
+
+        addEmployee(name: string) {
+            if (name === 'Max') {
+            return;
+            }
+            this.employees.push(name);
+        }
+
+        addReport(text: string) {
+            this.reports.push(text);
+            this.lastReport = text;
+        }
+
+        printReports() {
+            console.log(this.reports);
+        }
+    }
+```
+```typescript
+
+const accounting = new AccountingDepartment('d2', []);
+
+accounting.mostRecentReport = 'Year End Report';
+accounting.addReport('Something went wrong...');
+console.log(accounting.mostRecentReport);
 ```
