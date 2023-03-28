@@ -10,6 +10,7 @@
 66. [66. Overriding Properties & The "protected" Modifier](#66-overriding-properties)
 67. [67. Getters & Setters](#67-getters-setters)
 68. [68. Static Methods & Properties](#68-static-method-properties)
+69. [69. Abstract Classes](#69-abstract-classes)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -322,3 +323,105 @@ console.log(accounting.mostRecentReport);
 ```
 
 - Note: you can only access static method and properties by use the class name NOT `this` keyworld.
+
+### 69. Abstract Classes <a name="69-abstract-classes"></a>
+
+- Another way of adding methods to classes, which you plan to inherit from.
+- You can override a mehtod from base class in your specilize class inheriting from the base class.
+- `abstract` keyword
+
+```typescript
+    abstract class Department {
+        static fiscalYear = 2020;
+        // private readonly id: string;
+        // private name: string;
+        protected employees: string[] = [];
+
+        constructor(protected readonly id: string, public name: string) {
+            // this.id = id;
+            // this.name = n;
+            // console.log(Department.fiscalYear);
+        }
+
+        static createEmployee(name: string) {
+            return { name: name };
+        }
+
+        abstract describe(this: Department): void;
+
+        addEmployee(employee: string) {
+            // validation etc
+            // this.id = 'd2';
+            this.employees.push(employee);
+        }
+
+        printEmployeeInformation() {
+            console.log(this.employees.length);
+            console.log(this.employees);
+        }
+    }
+```
+
+```typescript
+    class ITDepartment extends Department {
+        admins: string[];
+        constructor(id: string, admins: string[]) {
+            super(id, 'IT');
+            this.admins = admins;
+        }
+
+        describe() {
+            console.log('IT Department - ID: ' + this.id);
+        }
+    }
+```
+
+```typescript
+    class AccountingDepartment extends Department {
+        private lastReport: string;
+
+        get mostRecentReport() {
+            if (this.lastReport) {
+            return this.lastReport;
+            }
+            throw new Error('No report found.');
+        }
+
+        set mostRecentReport(value: string) {
+            if (!value) {
+            throw new Error('Please pass in a valid value!');
+            }
+            this.addReport(value);
+        }
+
+        constructor(id: string, private reports: string[]) {
+            super(id, 'Accounting');
+            this.lastReport = reports[0];
+        }
+
+        describe() {
+            console.log('Accounting Department - ID: ' + this.id);
+        }
+
+        addEmployee(name: string) {
+            if (name === 'Max') {
+            return;
+            }
+            this.employees.push(name);
+        }
+
+        addReport(text: string) {
+            this.reports.push(text);
+            this.lastReport = text;
+        }
+
+        printReports() {
+            console.log(this.reports);
+        }
+    }
+```
+
+```typescript
+    it.describe();
+    accounting.describe();
+```
