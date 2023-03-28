@@ -7,6 +7,7 @@
 63. [63. Shorthand Initialization](#63-shorthand-initialization)
 64. [64. "readonly" Properties](#64-readonly-properties)
 65. [65. Inheritance](#65-inheritance)
+66. [66. Overriding Properties & The "protected" Modifier](#66-overriding-properties)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -149,3 +150,64 @@ You now can create a new deprtment called 'AccountingDepartment' and its own pro
 - Whenever you add your own constructor in a class that inherits from another class, you have to add `super` in the inheriting class and you have to execute it like a function.
 - Super here calls the constructor of the base class, so department constructor in this case. And now the other super takes the arguments of the parent class constructor, the ID, and the name. So here I can forward ID, so ID which I'm getting here is just passed to super, and I can hard code a value for the name, like IT.
 - Now, important, you have to call super first in your constructor before you do anything with the `this` keyword.
+
+### 66. Overriding Properties & The "protected" Modifier <a name="66-overriding-properties"></a>
+
+- You can override methods of your base class. You can add your own implementation, and then that implementation is used, instead of the base class's implementation.
+
+- For example, you can create a method called `addEmployee` to `AccountingDepartment` class:
+
+```typescript
+    class AccountingDepartment extends Department {
+        constructor(id: string, private reports: string[]) {
+            super(id, 'Accounting');
+        }
+
+        addEmployee(name: string) {
+            if (name === 'Max') {
+            return;
+            }
+            this.employees.push(name);
+        }
+
+        addReport(text: string) {
+            this.reports.push(text);
+        }
+
+        printReports() {
+            console.log(this.reports);
+        }
+    }
+```
+
+- And, you also have to control access to properties from the base Class with `protected`.
+- `protected` keyword: `protected` is like `private`, but unlike `private`, it's now not just available in this class, but also in any class that extends this class.
+- For example: 
+
+```typescript
+    class Department {
+        // private readonly id: string;
+        // private name: string;
+        protected employees: string[] = [];
+
+        constructor(private readonly id: string, public name: string) {
+            // this.id = id;
+            // this.name = n;
+        }
+
+        describe(this: Department) {
+            console.log(`Department (${this.id}): ${this.name}`);
+        }
+
+        addEmployee(employee: string) {
+            // validation etc
+            // this.id = 'd2';
+            this.employees.push(employee);
+        }
+
+        printEmployeeInformation() {
+            console.log(this.employees.length);
+            console.log(this.employees);
+        }
+    }
+```
