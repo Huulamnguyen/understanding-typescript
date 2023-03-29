@@ -13,6 +13,7 @@
 69. [69. Abstract Classes](#69-abstract-classes)
 70. [70. Singletons & Private Constructors](#70-singletons-private-constructors)
 72. [72. A First Interface](#72-a-first-interface)
+73. [73. Using Interfaces with Classes](#73-using-interfaces-with-classes)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -515,4 +516,42 @@ user1 = {
 };
 
 user1.greet('Hi there - I am');
+```
+
+### 73. Using Interfaces with Classes <a name="73-using-interfaces-with-classes"></a>
+
+- When you define something as an interface, it's super clear that you want to define the structure of an object with that. And indeed when it comes to defining object types, you more often see interfaces out there in the wild.
+
+- So here, we could now add a Person class, the name is available again because we renamed the interface. And now, tell typescript and this class should basically adhere to this interface. It should implement this interface.
+
+- We do this by adding the `implements` keyword after the class name. 
+
+- You can inherit only from one class, you can implement multiple interfaces by simply separating them with a comma,
+
+```typescript
+interface Greetable {
+  name: string;
+
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let user1: Greetable;
+
+user1 = new Person('Max');
+
+user1.greet('Hi there - I am');
+console.log(user1);
 ```
