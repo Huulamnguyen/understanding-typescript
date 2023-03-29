@@ -16,6 +16,9 @@
 73. [73. Using Interfaces with Classes](#73-using-interfaces-with-classes)
 74. [74. Why Interfaces?](#74-why-interfaces)
 75. [75. Readonly Interface Properties](#75-readonly-interface-properties)
+76. [76. Extending Interfaces](#76-extending-interfaces)
+
+--------------------------------
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -561,7 +564,7 @@ console.log(user1);
 - where we know we want to have a certain set of functionalities.
 - Let's say a greet method, and we want to ensure that a clause has such a greet method, and another clause has it maybe as well, well, then, we can implement an interface which forces the existence of this method. Then we can easily share functionality amongst clauses
 
-### 75. Readonly Interface Properties 75 <a name="75-readonly-interface-properties"></a>
+### 75. Readonly Interface Properties <a name="75-readonly-interface-properties"></a>
 - you can also add the read-only `readonly` modifier.
 - You cannot add `public` or `private` or anything like that
 
@@ -574,3 +577,55 @@ interface Greetable {
 ```
 
 - You can not re-write a read-only property from the interface.
+
+### 76. Extending Interfaces <a name="76-extending-interfaces"></a>
+- `Greetable` interface actually extends the `Named` interface, so that together, they form a new interface, which forces every object based on Greetable to have a greet method, but also to have a name. And to do that, we can add `extends` keywork.
+
+```typescript
+interface Named {
+  readonly name: string;
+}
+
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+```
+
+```typescript
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+```
+
+```typescript
+let user1: Greetable;
+
+user1 = new Person('Max');
+// user1.name = 'Manu';
+
+user1.greet('Hi there - I am');
+console.log(user1);
+```
+
+- So extending interfaces is possible. And there you can also extend more than one. So you can merge multiple interfaces into one single interface.
+
+```typescript
+interface Named {
+  readonly name: string;
+}
+
+interface Greetable extends Named, AnotherInterface, AnotherInterface1 {
+  greet(phrase: string): void;
+}
+```
+
+- NOTE: When you use classes in inheritance, you can only inherit from one class.
