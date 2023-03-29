@@ -19,6 +19,7 @@
 76. [76. Extending Interfaces](#76-extending-interfaces)
 77. [77. Interfaces as Function Types](#77-interfaces-as-function-types)
 78. [78. Optional Parameters & Properties](#78-optional-parameters-properties)
+79. [79. Compiling Interfaces to JavaScript](#79-compiling-interfaces-to-javascript)
 
 --------------------------------
 
@@ -689,3 +690,7 @@ user1 = new Person();
 user1.greet('Hi there - I am');
 console.log(user1);
 ```
+
+### 79. Compiling Interfaces to JavaScript <a name="79-compiling-interfaces-to-javascript"></a>
+
+At runtime, no trace will be left of these interfaces. You'll not see anything related to the interfaces in your code, only functions, classes, and all the other code is compiled in output. They're used during compilation to check your code and then they're ignored.
