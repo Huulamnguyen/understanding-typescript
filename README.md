@@ -18,6 +18,7 @@
 75. [75. Readonly Interface Properties](#75-readonly-interface-properties)
 76. [76. Extending Interfaces](#76-extending-interfaces)
 77. [77. Interfaces as Function Types](#77-interfaces-as-function-types)
+78. [78. Optional Parameters & Properties](#78-optional-parameters-properties)
 
 --------------------------------
 
@@ -646,4 +647,45 @@ let add: AddFn;
 add = (n1: number, n2: number) => {
   return n1 + n2;
 };
+```
+
+### 78. Optional Parameters & Properties <a name="78-optional-parameters-properties"></a>
+
+- You can also define optional properties in interfaces and also in classes
+- You can specify an optional property by adding a question mark after the property name.
+
+```typescript
+interface Named {
+  readonly name?: string;
+  outputName?: string;
+}
+```
+
+- Now on a class you can also have an optional property.
+- So that would be optional properties both in a **class** and in an **interface** and also in my **constructor** list here.
+
+```typescript
+interface Named {
+  readonly name?: string;
+  outputName?: string;
+}
+
+class Person implements Greetable {
+  name?: string;
+  age = 30;
+
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
+  }
+}
+
+let user1: Greetable;
+
+user1 = new Person();
+// user1.name = 'Manu';
+
+user1.greet('Hi there - I am');
+console.log(user1);
 ```
