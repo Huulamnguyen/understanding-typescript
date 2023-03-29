@@ -11,6 +11,7 @@
 67. [67. Getters & Setters](#67-getters-setters)
 68. [68. Static Methods & Properties](#68-static-method-properties)
 69. [69. Abstract Classes](#69-abstract-classes)
+70. [70. Singletons & Private Constructors](#70-singletons-private-constructors)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -425,3 +426,65 @@ console.log(accounting.mostRecentReport);
     it.describe();
     accounting.describe();
 ```
+
+### 70. Singletons & Private Constructors <a name="#70-singletons-private-constructors"></a>
+
+- The "singleton" pattern is about ensuring that you always only have exactly one instance of a certain class.
+- This can be useful in scenarios where you somehow can't use static methods or properties or you don't want to, but at the same time you want to make sure that you can't create multiple objects based on a class but that you always have exactly one object based on a class.
+
+- For example:
+
+Let's say for our `AccountingDepartment`, we wanna make sure that we can only create exactly one object based on this class, because we have exactly one accounting department in our entire company.
+
+We might have more than one IT department but we have exactly one accounting department. Now to enforce this and to avoid that we manually call new `AccountingDepartment` multiple times, we can turn the constructor of the `AccountingDepartment` class into a **private constructor** by adding the `private` keyword in front of it.
+
+```typescript
+    class AccountingDepartment extends Department {
+    private lastReport: string;
+
+    // ... Remainging codes
+
+    private constructor(id: string, private reports: string[]) {
+        super(id, 'Accounting');
+        this.lastReport = reports[0];
+    }
+
+    // ... remainging codes
+
+}
+```
+
+Now what this does is, it ensures that we can't call new on this. You will get an error because the constructor is private so it's only accessible from inside the class.
+
+which sounds strange because how do we get inside of the class if we can't create objects based on it anymore. The answer is, well, **static methods**.
+
+So here we can add a static method which we could call getInstance. Now getInstance will check if we already have an instance of this class and if not, return a new one
+
+For that we can add a new static property instance, a static private property so you can put private in front of static called instance which will be of type `AccountingDepartment`.
+
+```typescript
+    class AccountingDepartment extends Department {
+        private lastReport: string;
+        private static instance: AccountingDepartment;
+
+        // ... remaining codes ...
+
+        private constructor(id: string, private reports: string[]) {
+            super(id, 'Accounting');
+            this.lastReport = reports[0];
+        }
+
+        static getInstance() {
+            if (AccountingDepartment.instance) {
+            return this.instance;
+            }
+            this.instance = new AccountingDepartment('d2', []);
+            return this.instance;
+        }
+
+        // ... remaining code ...
+
+    }
+```
+
+The singleton pattern can sometimes be useful, you don't need it all the time, but it's definitely worth to know about it because it is something interesting which you can easily implement with TypeScript thanks to `private` constructors.
