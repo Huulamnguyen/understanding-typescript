@@ -17,6 +17,7 @@
 74. [74. Why Interfaces?](#74-why-interfaces)
 75. [75. Readonly Interface Properties](#75-readonly-interface-properties)
 76. [76. Extending Interfaces](#76-extending-interfaces)
+77. [77. Interfaces as Function Types](#77-interfaces-as-function-types)
 
 --------------------------------
 
@@ -629,3 +630,20 @@ interface Greetable extends Named, AnotherInterface, AnotherInterface1 {
 ```
 
 - NOTE: When you use classes in inheritance, you can only inherit from one class.
+
+### 77. Interfaces as Function Types <a name="77-interfaces-as-function-types"></a>
+
+- Now, interfaces can also be used to define the structure of a function.
+
+```typescript
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+
+let add: AddFn;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+```
