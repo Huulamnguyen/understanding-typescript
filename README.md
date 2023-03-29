@@ -12,6 +12,7 @@
 68. [68. Static Methods & Properties](#68-static-method-properties)
 69. [69. Abstract Classes](#69-abstract-classes)
 70. [70. Singletons & Private Constructors](#70-singletons-private-constructors)
+72. [72. A First Interface](#72-a-first-interface)
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -488,3 +489,30 @@ For that we can add a new static property instance, a static private property so
 ```
 
 The singleton pattern can sometimes be useful, you don't need it all the time, but it's definitely worth to know about it because it is something interesting which you can easily implement with TypeScript thanks to `private` constructors.
+
+### 72. A First Interface <a name="72-a-first-interface"></a>
+
+- What is an interface? in its simplest version, an **interface** describes the structure of an object. We can use it to describe how an object should look like.
+
+- For example:
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+let user1: Person;
+
+user1 = {
+  name: 'Max',
+  age: 30,
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+};
+
+user1.greet('Hi there - I am');
+```
