@@ -427,7 +427,7 @@ console.log(accounting.mostRecentReport);
     accounting.describe();
 ```
 
-### 70. Singletons & Private Constructors <a name="#70-singletons-private-constructors"></a>
+### 70. Singletons & Private Constructors <a name="70-singletons-private-constructors"></a>
 
 - The "singleton" pattern is about ensuring that you always only have exactly one instance of a certain class.
 - This can be useful in scenarios where you somehow can't use static methods or properties or you don't want to, but at the same time you want to make sure that you can't create multiple objects based on a class but that you always have exactly one object based on a class.
