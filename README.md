@@ -29,6 +29,7 @@
 85. [85. Discriminated Unions](#85-discriminated-unions)
 86. [86. Type Casting](#86-type-casting)
 87. [87. Index Properties](#87-index-properties)
+88. [88.Function Overloads](#88-function-overloads)
 
 --------------------------------
 
@@ -917,4 +918,26 @@ const errorBag: ErrorContainer = {
   email: 'Not a valid email!',
   username: 'Must start with a capital character!'
 };
+```
+
+### 88.Function Overloads <a name="88-function-overloads"></a>
+
+- **Overloads** is a feature that allows us to define multiple function signatures.
+- We can have multiple possible ways of calling a function with different parameters.
+- A function overload is written by simply writing function right above your main function.
+- Overload is used in situations  where TypeScript would not be able to correctly infer the return type on its own
+
+```typescript
+type Combinable = string | number;
+
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
 ```
