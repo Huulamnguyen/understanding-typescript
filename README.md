@@ -30,6 +30,7 @@
 86. [86. Type Casting](#86-type-casting)
 87. [87. Index Properties](#87-index-properties)
 88. [88.Function Overloads](#88-function-overloads)
+89. [89. Optional Chaining](#89-optional-chaining)
 
 --------------------------------
 
@@ -940,4 +941,17 @@ function add(a: Combinable, b: Combinable) {
   }
   return a + b;
 }
+```
+
+### 89. Optional Chaining <a name="89-optional-chaining"></a>
+
+Let say you fetch user data from backend or from any data source like API. And if you wouldn't know whether the object is defined or not. In typescript, we can use optional chaining. For example:
+
+```typescript
+const fetchedUserData = {
+    id: 1,
+    name: "Liam",
+    job: { title: "CEO", description: "My own company"}
+}
+console.log(fetchedUserData?.job?.title)
 ```
