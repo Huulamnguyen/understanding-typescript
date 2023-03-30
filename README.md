@@ -31,6 +31,7 @@
 87. [87. Index Properties](#87-index-properties)
 88. [88.Function Overloads](#88-function-overloads)
 89. [89. Optional Chaining](#89-optional-chaining)
+90. [90. Nullish Coalescing](#90-nullish-coalescing)
 
 --------------------------------
 
@@ -945,7 +946,7 @@ function add(a: Combinable, b: Combinable) {
 
 ### 89. Optional Chaining <a name="89-optional-chaining"></a>
 
-Let say you fetch user data from backend or from any data source like API. And if you wouldn't know whether the object is defined or not. In typescript, we can use optional chaining. For example:
+Let say you fetch user data from backend or from any data source like API. And if you wouldn't know whether the object is defined or not. In typescript, we can use **optional chaining**. For example:
 
 ```typescript
 const fetchedUserData = {
@@ -954,4 +955,24 @@ const fetchedUserData = {
     job: { title: "CEO", description: "My own company"}
 }
 console.log(fetchedUserData?.job?.title)
+```
+
+### 90. Nullish Coalescing <a name="90-nullish-coalescing"></a>
+
+Now loosely related to **optional chaining**, we got another nice feature in TypeScript, which helps us deal with nullish data. And that feature is called **nullish coalescing**.
+
+Now imagine you have some data, some input, where you don't know with certainty whether it's null or undefined or whether it's actually a valid piece of data.
+
+If you are fetching this through some DOM API, where you don't know it with certainty, or if you're getting this from a back-end, then you might not know in advance and TypeScript might not know whether this is null or not.
+
+If you then want to store this in some other constant or variable like storedData, you might wanna make sure that if it is null, you store a fallback value.
+
+The double question mark operator ??, this is called the nullish coalescing operator. And it means if this is **null** or **undefined**, and really just that, **not an empty string, not zero**, really just **null** or **undefined**, then we'll use the fallback.
+
+```typescript
+const userInput = undefined;
+
+const storedData = userInput ?? 'DEFAULT';
+
+console.log(storedData);
 ```
