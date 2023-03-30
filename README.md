@@ -27,6 +27,7 @@
 83. [83. Intersection Types](#83-intersection-types)
 84. [84. More on Type Guards](#84-more-on-type-guards)
 85. [85. Discriminated Unions](#85-discriminated-unions)
+86. [86. Type Casting](#86-type-casting)
 
 --------------------------------
 
@@ -866,4 +867,28 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10});
+```
+
+### 86. Type Casting <a name="86-type-casting"></a>
+
+- **Type casting** helps you tell TypeScript that some value is of a specific type where TypeScript is not able to detect it on it's own.
+- For example, if you have <p></p> tag, typescript is actually able to find out but not sure it is an **element** or **null**.
+
+- There are two ways to case a type in TS:
+```typescript
+const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+```
+OR
+```typescript
+const userInputElement = document.getElementById('user-input') as HTMLInputElement;
+```
+
+- The explanation mark (!) allows us to tell TypeScript that the expression in front of it will never yield **null**.
+- Otherwise, if you're not sure that this will not return null, you can use an **if** check.
+```typescript
+const userInputElement = document.getElementById('user-input');
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = 'Hi there!';
+}
 ```
