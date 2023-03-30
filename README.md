@@ -26,6 +26,7 @@
 82. [82. Module Introduction](#82-module-introduction)
 83. [83. Intersection Types](#83-intersection-types)
 84. [84. More on Type Guards](#84-more-on-type-guards)
+85. [85. Discriminated Unions](#85-discriminated-unions)
 
 --------------------------------
 
@@ -831,4 +832,38 @@ function add(a: Combinable, b: Combinable) {
   }
   return a + b;
 }
+```
+
+### 85. Discriminated Unions <a name="85-discriminated-unions"></a>
+
+- Now this is a discriminated union because we have one common property in every object that makes up our union, which describes that object, so that we can use this property that describes this object in our check to have 100% type safety and understand which properties are available for such an object and which properties are not.
+
+- Useful pattern which you can use when working with **objects** and with **union types**, **interfaces**.
+
+```typescript
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+  }
+  console.log('Moving at speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10});
 ```
