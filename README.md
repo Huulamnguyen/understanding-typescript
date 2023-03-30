@@ -24,6 +24,7 @@
 --------------------------------
 ## Section 6: Advanced Types (#section-6-advanced-types)
 82. [82. Module Introduction](#82-module-introduction)
+83. [83. Intersection Types](#83-intersection-types)
 
 --------------------------------
 
@@ -712,3 +713,47 @@ At runtime, no trace will be left of these interfaces. You'll not see anything r
 - We'll also have a look at **type casting** a useful feature for telling typescripts about the type of something in cases where typescript is not able to find out which type something has on its own.
 
 - We'll have a look at **function overloads**, a pretty neat feature that allows us to write more flexible functions with better types of support than we might otherwise get it.
+
+### 83. Intersection Types <a name="83-intersection-types"></a>
+- Intersection types allow us to combine other types.
+```typescript
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+```
+```typescript
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+```
+
+- You can combine type Admin and type Employee **object type**:
+```typescript
+type ElevatedEmployee = Admin & Employee;
+```
+```typescript
+const e1: ElevatedEmployee = {
+  name: 'Max',
+  privileges: ['create-server'],
+  startDate: new Date()
+};
+```
+
+- Interface can also be combined as type.
+```typescript
+interface ElevatedEmployee extends Employee, Admin {}
+```
+
+- Intersection type can combine any types like **union type**:
+```typescript
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+```
+
+So the intersection operator can be used with any types and it then simply builds the intersection of these types.
+- In the case of a **union type**, that is basically the types they have in common.
+- In the case of **object types**, it's simply the combination of these object properties.
