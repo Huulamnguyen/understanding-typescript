@@ -25,6 +25,7 @@
 ## Section 6: Advanced Types (#section-6-advanced-types)
 82. [82. Module Introduction](#82-module-introduction)
 83. [83. Intersection Types](#83-intersection-types)
+84. [84. More on Type Guards](#84-more-on-type-guards)
 
 --------------------------------
 
@@ -757,3 +758,77 @@ type Universal = Combinable & Numeric;
 So the intersection operator can be used with any types and it then simply builds the intersection of these types.
 - In the case of a **union type**, that is basically the types they have in common.
 - In the case of **object types**, it's simply the combination of these object properties.
+
+### 84. More on Type Guards <a name="84-more-on-type-guards"></a>
+
+- **Type guards** is just a term that describes the idea or approach of checking if a certain property or method exists before you try to use it.
+- For **objects**, that can be done with **instanceof** or with **in**:
+```typescript
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log('Name: ' + emp.name);
+  if ('privileges' in emp) {
+    console.log('Privileges: ' + emp.privileges);
+  }
+  if ('startDate' in emp) {
+    console.log('Start Date: ' + emp.startDate);
+  }
+}
+
+printEmployeeInformation({ name: 'Manu', startDate: new Date() });
+```
+```typescript
+class Car {
+  drive() {
+    console.log('Driving...');
+  }
+}
+
+class Truck {
+  drive() {
+    console.log('Driving a truck...');
+  }
+
+  loadCargo(amount: number) {
+    console.log('Loading cargo ...' + amount);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+useVehicle(v1);
+useVehicle(v2);
+```
+
+- for other types, you can use **typeof**:
+```typescript
+type Combinable = string | number;
+
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+```
