@@ -22,7 +22,7 @@
 79. [79. Compiling Interfaces to JavaScript](#79-compiling-interfaces-to-javascript)
 
 --------------------------------
-## Section 6: Advanced Types (#section-6-advanced-types)
+## [Section 6: Advanced Types] (#section-6-advanced-types)
 82. [82. Module Introduction](#82-module-introduction)
 83. [83. Intersection Types](#83-intersection-types)
 84. [84. More on Type Guards](#84-more-on-type-guards)
