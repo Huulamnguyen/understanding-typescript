@@ -28,6 +28,7 @@
 84. [84. More on Type Guards](#84-more-on-type-guards)
 85. [85. Discriminated Unions](#85-discriminated-unions)
 86. [86. Type Casting](#86-type-casting)
+87. [87. Index Properties](#87-index-properties)
 
 --------------------------------
 
@@ -891,4 +892,29 @@ const userInputElement = document.getElementById('user-input');
 if (userInputElement) {
   (userInputElement as HTMLInputElement).value = 'Hi there!';
 }
+```
+
+### 87. Index Properties <a name="87-index-properties"></a>
+
+Let's say your writing an application where you're validating some user input. So you have multiple input fields and depending on what the user enters there and which field it is, you might wanna store and eventually show different error messages.
+
+For example, if it's an email field you wanna check whoever it is in the email and if it is not then you wanna add a proper error message to the error container
+
+I want this to be a flexible container. I want to be able to use it on any form I have in my webpage. And I might have different forms with different inputs with different identifier. So I don't want to restrict myself to just our email and username errors.
+
+And for such a scenario we can use index types.
+
+```typescript
+interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!' }
+  [prop: string]: string;
+}
+```
+This says I don't know the exact property name. I also don't know the property count. I just know that every property which is added to this object, which is based on error container, must have a property name which can be interpreted as a **string** and the value of the property also must be a **string**.
+
+And now, we can create an error:
+```typescript
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email!',
+  username: 'Must start with a capital character!'
+};
 ```
