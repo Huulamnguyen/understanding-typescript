@@ -22,6 +22,10 @@
 79. [79. Compiling Interfaces to JavaScript](#79-compiling-interfaces-to-javascript)
 
 --------------------------------
+## Section 6: Advanced Types (#section-6-advanced-types)
+82. [82. Module Introduction](#82-module-introduction)
+
+--------------------------------
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -694,3 +698,17 @@ console.log(user1);
 ### 79. Compiling Interfaces to JavaScript <a name="79-compiling-interfaces-to-javascript"></a>
 
 At runtime, no trace will be left of these interfaces. You'll not see anything related to the interfaces in your code, only functions, classes, and all the other code is compiled in output. They're used during compilation to check your code and then they're ignored.
+
+## Section 6: Advanced Types <a name="section-6-advanced-types"></a>
+
+### 82. Module Introduction <a name="82-module-introduction"></a>
+
+- **Intersection types**, what that is and why it mighty be useful.
+
+- **Type guards**, what we can do with those
+
+- **Discriminated unions**, fancy term for a quite interesting topic.
+
+- We'll also have a look at **type casting** a useful feature for telling typescripts about the type of something in cases where typescript is not able to find out which type something has on its own.
+
+- We'll have a look at **function overloads**, a pretty neat feature that allows us to write more flexible functions with better types of support than we might otherwise get it.
