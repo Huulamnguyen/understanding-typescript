@@ -34,6 +34,11 @@
 90. [90. Nullish Coalescing](#90-nullish-coalescing)
 
 --------------------------------
+## Section 7: Generics
+93. [93. Module Introduction](#93-module-introduction)
+94. [94. Built-in Generics & What are Generics?](#94-built-in-generics-&-what-are-generics)
+
+--------------------------------
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 - `public` keyword: default
@@ -976,3 +981,36 @@ const storedData = userInput ?? 'DEFAULT';
 
 console.log(storedData);
 ```
+
+## Section 7: Generics
+
+### 93. Module Introduction <a name="93-module-introduction"></a>
+Generics only exists in Typescript, not Vanilla Javascript.
+- What is Generics? why they are interesting and helpful?
+- Generic functions and classes.
+- Generic contrain.
+- Special TypeScript types, which also typically are generic.
+
+### 94. Built-in Generics & What are Generics? <a name="94-built-in-generics-&-what-are-generics"></a>
+
+- **Generic Type** is a type that a generic type **built into TypeScript**. A type which is connected to a another type, where we want to know which our type that is so to TypeScript can give us better support.
+- For example, an Array of string OR an Array of number:
+
+```typescript
+const names: Array<string> = []; // the same as string[]
+const numbers: Array<number> = []; // the same as number[]
+
+// Or wen can unuion types:
+const streets: Array<string | number> = []
+```
+
+- Another generic type which is built into TypeScript is the **promise type.** For example:
+```typescript
+const promise: Promise<string> = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('This is done!');
+  }, 2000);
+});
+```
+
+- Why generic types is useful? We can tell typescript that the promise should return a string, then TS can warn us with an error if we use wrong type. So, we can get better type with generic types.
