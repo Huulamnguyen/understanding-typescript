@@ -47,7 +47,19 @@
 96. [96. Working with Constraints](#96-working-with-constraints)
 97. [97. Another Generic Function](#97-another-generic-function)
 98. [98. The "keyof" constraint](#98-the-keyof-constraint)
-99. [### 99. Generic Classes](#99-generic-classes)
+99. [99. Generic Classes](#99-generic-classes)
+
+---
+
+## Section 8: Decorators
+
+105. [105. A First Class Decorator](#105-a-first-class-decorator)
+106. [106. Working with Decorator Factories](#106-working-with-decorator-factories)
+107. [107. Building More Useful Decorators](#107-building-more-useful-decorator)
+108. [108. Adding Multiple Decorators](#108-adding-multiple-decorators)
+109. [110. Accessor & Parameter Decorators](#110-accessor-parameter-decorators)
+
+## Section 9: Practice Time! Let's build a Drag & Drop Project
 
 ---
 
@@ -1179,3 +1191,194 @@ const names: Readonly<string[]> = ['Max', 'Anna'];
 // names.push('Manu');
 // names.pop();
 ```
+
+## Section 8: Decorators
+
+### 105. A First Class Decorator <a name="105-a-first-class-decorator"></a>
+
+- A decorator is a function that applies to a class
+
+```Typescript
+function Logger(constructor: Function) {
+  console.log("Logging ...");
+  console.log(constructor);
+}
+
+@Logger
+class Person {
+  name = "Max";
+
+  constructor() {
+    console.log("Creating this person ...");
+  }
+}
+
+const pers = new Person();
+console.log(pers);
+```
+
+- Decorators executes when the class is defined.
+
+### 106. Working with Decorator Factories<a name="106-working-with-decorator-factories"></a>
+
+```Typescript
+function Logger(logString: string) {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
+
+@Logger("LOGGING - PERSON")
+class Person {
+  name = "Max";
+
+  constructor() {
+    console.log("Creating person object...");
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+
+```
+
+### 107. Building More Useful Decorators <a name="107-building-more-useful-decorator"></a>
+
+```typescript
+function Logger(logString: string) {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
+
+function WithTemplate(template: string, hookId: string) {
+  return function (constructor: any) {
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector("h1")!.textContent = p.name;
+    }
+  };
+}
+
+// @Logger('LOGGING - PERSON')
+@WithTemplate("<h1>My Person Object</h1>", "app")
+class Person {
+  name = "Max";
+
+  constructor() {
+    console.log("Creating person object...");
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+```
+
+### 108. Adding Multiple Decorators <a name="108-adding-multiple-decorators"></a>
+
+- Decorator executes bottom up.
+
+```typescript
+function Logger(logString: string) {
+  console.log("LOGGER FACTORY");
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
+
+function WithTemplate(template: string, hookId: string) {
+  console.log("TEMPLATE FACTORY");
+  return function (constructor: any) {
+    console.log("Rendering template");
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector("h1")!.textContent = p.name;
+    }
+  };
+}
+
+// @Logger('LOGGING - PERSON')
+@Logger("LOGGING")
+@WithTemplate("<h1>My Person Object</h1>", "app")
+class Person {
+  name = "Max";
+
+  constructor() {
+    console.log("Creating person object...");
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+```
+
+### 110. Accessor & Parameter Decorators <a name="110-accessor-parameter-decorators">
+
+```typescript
+function Log(target: any, propertyName: string | Symbol) {
+  console.log("Property decorator!");
+  console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log("Accessor decorator!");
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log3(
+  target: any,
+  name: string | Symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("Method decorator!");
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log4(target: any, name: string | Symbol, position: number) {
+  console.log("Parameter decorator!");
+  console.log(target);
+  console.log(name);
+  console.log(position);
+}
+
+class Product {
+  @Log
+  title: string;
+  private _price: number;
+
+  @Log2
+  set price(val: number) {
+    if (val > 0) {
+      this._price = val;
+    } else {
+      throw new Error("Invalid price - should be positive!");
+    }
+  }
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
+    return this._price * (1 + tax);
+  }
+}
+```
+
+## Section 9: Practice Time! Let's build a Drag & Drop Project
