@@ -1382,3 +1382,7 @@ class Product {
 ```
 
 ## Section 9: Practice Time! Let's build a Drag & Drop Project
+
+### 120. Module Introduction <a name="120-module-introduction">
+
+- Builing a Drag & Drop Project with TypeScript
