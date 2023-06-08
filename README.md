@@ -61,6 +61,10 @@
 
 ## Section 9: Practice Time! Let's build a Drag & Drop Project
 
+## Section10: Modules and Namespaces
+
+149. [149. Wrap Up](#149-wrap-up)
+
 ---
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
@@ -1386,3 +1390,11 @@ class Product {
 ### 120. Module Introduction <a name="120-module-introduction">
 
 - Builing a Drag & Drop Project with TypeScript
+
+## Section10: Modules and Namespaces
+
+### 149. Wrap Up <a name="149-wrap-up"></a>
+
+- Using ever namespaces or ES modules is there for a way better alternative. Since it makes sure, that every file on its own is relatively small, and therefore stays manageable.
+- The clear recommendations is ES Modules. Namspaces will no notice if there are something missing.
+- To support the app running all browsers, we can use **webpack**
