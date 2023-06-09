@@ -59,11 +59,19 @@
 108. [108. Adding Multiple Decorators](#108-adding-multiple-decorators)
 109. [110. Accessor & Parameter Decorators](#110-accessor-parameter-decorators)
 
+---
+
 ## Section 9: Practice Time! Let's build a Drag & Drop Project
+
+---
 
 ## Section10: Modules and Namespaces
 
 149. [149. Wrap Up](#149-wrap-up)
+
+---
+
+## Section 11: Using Webpack with TypeScript
 
 ---
 
@@ -1398,3 +1406,80 @@ class Product {
 - Using ever namespaces or ES modules is there for a way better alternative. Since it makes sure, that every file on its own is relatively small, and therefore stays manageable.
 - The clear recommendations is ES Modules. Namspaces will no notice if there are something missing.
 - To support the app running all browsers, we can use **webpack**
+
+## Section 11: Using Webpack with TypeScript
+
+- Webpack is a tool used to reduce HTTP requests.
+- Webpack helps us bundle our files together, optimize code, speed up the application
+- Main Workign file: "webpack-01-basic-setup"
+
+- Configure webpack for development example:
+
+```typescript
+const path = require("path");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/app.ts",
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/dist/",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+```
+
+- Configure webpack for production example:
+
+```typescript
+const path = require("path");
+const CleanPlugin = require("clean-webpack-plugin");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/app.ts",
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  plugins: [new CleanPlugin.CleanWebpackPlugin()],
+};
+```
