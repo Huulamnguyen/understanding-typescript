@@ -1494,9 +1494,83 @@ module.exports = {
 
 ## Section 12: 3rd Parties Libraries & TypeScript <a name="3rd-party-libraries-and-typescript"></a>
 
-- Using JavaScript libraries with TypeScript
+- Using JavaScript libraries with TypeScript: Lodash, Class Transformer, Class Validator
 
 ```shell
 // To install lodash for TS
 npm install --save @types/lodash
+```
+
+```typescript
+// Class Transformer with plainToClass
+import "reflect-metadata";
+import { plainToClass } from "class-transformer";
+
+import { Product } from "./product.model";
+
+const products = [
+  { title: "DSA Javascript", price: 12.99 },
+  { title: "DSA Python", price: 10.99 },
+  { title: "DSA Java", price: 13.99 },
+];
+
+const loadedProducts = plainToClass(Product, products);
+
+for (const product of loadedProducts) {
+  console.log(product.getInformation());
+}
+```
+
+```typescript
+// Class Validator
+
+// In Model
+import { IsNumber, IsNotEmpty, IsPositive } from "class-validator";
+
+export class Product {
+  @IsNotEmpty({ message: "Product title should not be empty" })
+  title: string;
+  @IsNumber()
+  @IsPositive({ message: "Product price should be positive" })
+  price: number;
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
+  }
+
+  getInformation() {
+    return [this.title, `${this.price}`];
+  }
+}
+
+// In App.ts
+import "reflect-metadata";
+import { plainToClass } from "class-transformer";
+import { validate } from "class-validator";
+
+import { Product } from "./product.model";
+
+const products = [
+  { title: "DSA Javascript", price: 12.99 },
+  { title: "DSA Python", price: 10.99 },
+  { title: "DSA Java", price: 13.99 },
+];
+
+const loadedProducts = plainToClass(Product, products);
+
+for (const product of loadedProducts) {
+  console.log(product.getInformation());
+}
+
+// const product1 = new Product("DSA Javascript", 12.99);
+
+const newProductWithValidator = new Product("", -5);
+validate(newProductWithValidator).then((errors) => {
+  if (errors.length > 0) {
+    console.log("VALIDATION ERRORS", errors);
+  } else {
+    console.log(newProductWithValidator);
+  }
+});
 ```
