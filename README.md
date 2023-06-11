@@ -83,6 +83,10 @@
 
 ---
 
+## Section 13: Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
+
+---
+
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
 
 - `public` keyword: default
@@ -1574,3 +1578,5 @@ validate(newProductWithValidator).then((errors) => {
   }
 });
 ```
+
+## Section 13: Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
