@@ -73,6 +73,14 @@
 
 ## Section 11: Using Webpack with TypeScript
 
+150. [Using Webpack with TypeScript](#using-webpack-with-typescript)
+
+---
+
+## Section 12: 3rd Party Libraries & TypeScript
+
+151. [3rd Parties Libraries & TypeScript](#3rd-party-libraries-and-typescript)
+
 ---
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
@@ -1407,7 +1415,7 @@ class Product {
 - The clear recommendations is ES Modules. Namspaces will no notice if there are something missing.
 - To support the app running all browsers, we can use **webpack**
 
-## Section 11: Using Webpack with TypeScript
+## Section 11: Using Webpack with TypeScript <a name="using-webpack-with-typescript">
 
 - Webpack is a tool used to reduce HTTP requests.
 - Webpack helps us bundle our files together, optimize code, speed up the application
@@ -1482,4 +1490,15 @@ module.exports = {
   },
   plugins: [new CleanPlugin.CleanWebpackPlugin()],
 };
+```
+
+## Section 12: 3rd Party Libraries & TypeScript
+
+## Section 13: 3rd Parties Libraries & TypeScript](#3rd-party-libraries-and-typescript)
+
+- Using JavaScript libraries with TypeScript
+
+```shell
+// To install lodash for TS
+npm install --save @types/lodash
 ```
