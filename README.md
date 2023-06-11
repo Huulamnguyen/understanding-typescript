@@ -1492,7 +1492,7 @@ module.exports = {
 };
 ```
 
-## Section 12: 3rd Parties Libraries & TypeScript](#3rd-party-libraries-and-typescript)
+## Section 12: 3rd Parties Libraries & TypeScript <a name="3rd-party-libraries-and-typescript"></a>
 
 - Using JavaScript libraries with TypeScript
 
