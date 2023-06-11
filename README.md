@@ -1492,9 +1492,7 @@ module.exports = {
 };
 ```
 
-## Section 12: 3rd Party Libraries & TypeScript
-
-## Section 13: 3rd Parties Libraries & TypeScript](#3rd-party-libraries-and-typescript)
+## Section 12: 3rd Parties Libraries & TypeScript](#3rd-party-libraries-and-typescript)
 
 - Using JavaScript libraries with TypeScript
 
