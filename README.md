@@ -1580,3 +1580,13 @@ validate(newProductWithValidator).then((errors) => {
 ```
 
 ## Section 13: Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
+
+### Description:
+
+- A mini application that allow user to input location and show it on a map
+
+### technologies Used:
+
+- Typscript
+- Axios (HTTP reuqest API)
+- Google Map API (Google Map JavaScript SDK)
