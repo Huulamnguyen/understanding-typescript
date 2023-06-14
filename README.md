@@ -85,6 +85,12 @@
 
 ## Section 13: Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
 
+152. [View project](#152-view-project)
+
+---
+
+## Section 14: ReactJS & TypeScript
+
 ---
 
 ### 62. "private" and "public" Access Modifiers <a name="62-private-and-public-access-modifiers"></a>
@@ -1581,7 +1587,7 @@ validate(newProductWithValidator).then((errors) => {
 
 ## Section 13: Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
 
-### Description:
+### Description <a name="152-view-project"></a>
 
 - A mini application that allow user to input location and show it on a map
 
@@ -1590,3 +1596,5 @@ validate(newProductWithValidator).then((errors) => {
 - Typscript
 - Axios (HTTP reuqest API)
 - Google Map API (Google Map JavaScript SDK)
+
+## Section 14: ReactJS & TypeScript
